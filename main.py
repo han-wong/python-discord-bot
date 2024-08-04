@@ -42,12 +42,11 @@ async def on_startup():
     """Called when the bot starts"""
     logger.info(f"Logged in as {client.user}")
 
-
 # get all python files in "extensions" folder
 extensions = [
-    f"extensions.{f[:-3]}"
-    for f in os.listdir("extensions")
-    if f.endswith(".py") and not f.startswith("_")
+    f"extensions.{f.name}"
+    for f in os.scandir("extensions")
+    if f.is_dir() and not f.name.startswith("_")
 ]
 for extension in extensions:
     try:
